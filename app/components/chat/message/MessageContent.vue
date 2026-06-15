@@ -7,13 +7,16 @@ import {
   isToolUIPart,
 } from "ai";
 import type { UIMessage } from "ai";
-import type { EveDynamicToolPart } from "eve/vue";
+import type { UseEveAgentStatus } from "eve/vue";
+import type { EveDynamicToolPart, EveMessage } from "eve/vue";
 import { isPartStreaming, isToolStreaming } from "@nuxt/ui/utils/ai";
 import type { AgentInputResponse } from "~/components/AgentInputRequest.vue";
 import type { WeatherUIToolInvocation } from "~~/shared/utils/tools/weather";
 
-defineProps<{
-  message: UIMessage;
+const props = defineProps<{
+  message: EveMessage;
+  status: UseEveAgentStatus;
+  isLast?: boolean;
   canRespond?: boolean;
 }>();
 
@@ -21,14 +24,33 @@ const emit = defineEmits<{
   inputResponses: [responses: AgentInputResponse[]];
 }>();
 
-function isToolLikePart(part: UIMessage["parts"][number]) {
+type UIPart = UIMessage["parts"][number];
+
+const rawParts = computed(() => props.message.parts as UIMessage["parts"]);
+const parts = computed(() => getMergedParts(rawParts.value));
+
+const isBusy = computed(
+  () => props.status === "submitted" || props.status === "streaming",
+);
+
+const showThinking = computed(
+  () =>
+    props.message.role === "assistant"
+    && props.isLast
+    && isBusy.value
+    && !hasVisibleParts(rawParts.value),
+);
+
+function isToolLikePart(part: UIPart) {
   return isToolUIPart(part) || isDynamicToolUIPart(part);
 }
 </script>
 
 <template>
+  <ChatActivityIndicator v-if="showThinking" />
+
   <template
-    v-for="(part, index) in getMergedParts(message.parts)"
+    v-for="(part, index) in parts"
     :key="`${message.id}-${part.type}-${index}`"
   >
     <UChatReasoning
@@ -47,6 +69,7 @@ function isToolLikePart(part: UIMessage["parts"][number]) {
       <ChatToolWeather
         v-if="getToolName(part) === 'weather'"
         :invocation="{ ...(part as WeatherUIToolInvocation) }"
+        :streaming="isToolStreaming(part)"
       />
       <UChatTool
         v-else-if="getToolName(part) === 'web_search' || getToolName(part) === 'google_search'"
@@ -85,11 +108,21 @@ function isToolLikePart(part: UIMessage["parts"][number]) {
     </template>
 
     <template v-else-if="isTextUIPart(part)">
-      <ChatComark
+      <div
         v-if="message.role === 'assistant'"
-        :markdown="part.text"
-        :streaming="isPartStreaming(part)"
-      />
+        class="relative"
+      >
+        <ChatComark
+          :key="isPartStreaming(part) ? `${message.id}-text-${part.text.length}` : `${message.id}-text-${index}`"
+          :markdown="part.text"
+          :streaming="isPartStreaming(part)"
+        />
+        <span
+          v-if="isPartStreaming(part) && isLast"
+          class="ml-0.5 inline-block h-[1.1em] w-0.5 translate-y-px animate-pulse rounded-full bg-highlighted"
+          aria-hidden="true"
+        />
+      </div>
       <p
         v-else
         class="whitespace-pre-wrap"

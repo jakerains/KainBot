@@ -1,15 +1,23 @@
 <script setup lang="ts">
 import type { UIMessage } from "ai";
+import type { EveMessage } from "eve/vue";
 import type { AgentInputResponse } from "~/components/AgentInputRequest.vue";
 
 const { data, error, send, status, stop } = useAdamChat();
+const { resetTurnEventCounts } = useStreamLog();
 
-const messages = computed(() => [...data.value.messages] as UIMessage[]);
+const messages = computed(() => [...data.value.messages] as EveMessage[]);
 const isBusy = computed(
   () => status.value === "submitted" || status.value === "streaming",
 );
 
 const input = ref("");
+
+watch(status, (value) => {
+  if (value === "submitted") {
+    resetTurnEventCounts();
+  }
+});
 
 onMounted(() => {
   const pending = consumePendingMessage();
@@ -57,26 +65,21 @@ function handleInputResponses(inputResponses: AgentInputResponse[]) {
         <UContainer class="flex flex-1 flex-col gap-4 sm:gap-6">
           <UChatMessages
             should-auto-scroll
-            :messages="messages"
+            :messages="messages as unknown as UIMessage[]"
             :status="status"
             :spacing-offset="160"
             :assistant="{ side: 'left', variant: 'naked', ui: { container: 'relative flex w-full min-w-0 items-start' } }"
             class="pt-(--ui-header-height) pb-4 sm:pb-6"
           >
             <template #indicator>
-              <div class="flex items-center gap-1.5">
-                <ChatIndicator />
-
-                <UChatShimmer
-                  text="Thinking..."
-                  class="text-sm"
-                />
-              </div>
+              <ChatActivityIndicator />
             </template>
 
             <template #content="{ message }">
               <ChatMessageContent
-                :message="message"
+                :message="message as EveMessage"
+                :status="status"
+                :is-last="message.id === messages.at(-1)?.id"
                 :can-respond="!isBusy"
                 @input-responses="handleInputResponses"
               />
@@ -92,7 +95,7 @@ function handleInputResponses(inputResponses: AgentInputResponse[]) {
             @submit="handleSubmit"
           >
             <template #footer>
-              <div />
+              <ChatStreamInspector :status="status" />
 
               <UChatPromptSubmit
                 :status="status"

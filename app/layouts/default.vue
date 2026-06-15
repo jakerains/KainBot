@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { agent } from "~~/shared/agent";
 
-useAdamChat();
-
 const sidebarOpen = ref(false);
 const searchOpen = ref(false);
 

@@ -3,7 +3,12 @@ import type { WeatherUIToolInvocation } from "~~/shared/utils/tools/weather";
 
 const props = defineProps<{
   invocation: WeatherUIToolInvocation;
+  streaming?: boolean;
 }>();
+
+const isLoading = computed(
+  () => props.invocation.state !== "output-available" && props.invocation.state !== "output-error",
+);
 
 const color = computed(() => {
   return (
@@ -11,16 +16,7 @@ const color = computed(() => {
       "output-available":
         "bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-600 text-white dark:from-sky-500 dark:via-blue-600 dark:to-indigo-700",
       "output-error": "bg-muted text-error",
-    }[props.invocation.state as string] || "bg-muted text-white"
-  );
-});
-
-const icon = computed(() => {
-  return (
-    {
-      "input-available": "i-lucide-cloud-sun",
-      "output-error": "i-lucide-triangle-alert",
-    }[props.invocation.state as string] || "i-lucide-loader-circle"
+    }[props.invocation.state as string] || "bg-muted text-muted"
   );
 });
 
@@ -28,6 +24,7 @@ const message = computed(() => {
   return (
     {
       "input-available": "Loading weather data...",
+      "input-streaming": "Loading weather data...",
       "output-error": "Can't get weather data, please try again later",
     }[props.invocation.state as string] || "Loading weather data..."
   );
@@ -123,14 +120,13 @@ const message = computed(() => {
     </template>
 
     <div
-      v-else
+      v-else-if="isLoading"
       class="flex h-44 items-center justify-center"
     >
       <div class="text-center">
         <UIcon
-          :name="icon"
-          class="mx-auto mb-2 size-8"
-          :class="[invocation.state === 'input-streaming' && 'animate-spin']"
+          name="i-lucide-loader-circle"
+          class="mx-auto mb-2 size-8 animate-spin"
         />
         <div class="text-sm">
           {{ message }}
