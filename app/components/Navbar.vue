@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { startNewChat } from "~/composables/chat/navigation";
+</script>
+
 <template>
   <UDashboardNavbar
     class="pointer-events-none absolute inset-x-0 top-0 z-10 border-b-0 backdrop-blur sm:px-4 lg:backdrop-blur-none"

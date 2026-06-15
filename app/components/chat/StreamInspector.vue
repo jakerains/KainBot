@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import type { UseEveAgentStatus } from "eve/vue";
+import type { ChatStatus } from "~/composables/chat/types";
+import { useStreamLog } from "~/composables/chat/providers/eve/stream-log";
 
 const props = defineProps<{
-  status: UseEveAgentStatus;
+  status: ChatStatus;
 }>();
 
 const open = ref(false);

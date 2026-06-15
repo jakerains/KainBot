@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { agent } from "~~/shared/agent";
+import { startNewChat } from "~/composables/chat/navigation";
 
 const sidebarOpen = ref(false);
 const searchOpen = ref(false);
