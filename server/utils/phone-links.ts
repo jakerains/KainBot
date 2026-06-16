@@ -38,6 +38,17 @@ export async function getPhoneLinkForAppUser(appUserId: string) {
   return row ? rowToRecord(row) : undefined;
 }
 
+export async function getPhoneLinkByPhoneNumber(phoneNumber: string) {
+  const normalized = normalizePhoneNumber(phoneNumber);
+
+  const [row] = await db.select()
+    .from(schema.phoneLinks)
+    .where(eq(schema.phoneLinks.phoneNumber, normalized))
+    .limit(1);
+
+  return row ? rowToRecord(row) : undefined;
+}
+
 export async function upsertPhoneLinkForAppUser(appUserId: string, phoneNumber: string) {
   const normalized = normalizePhoneNumber(phoneNumber);
 

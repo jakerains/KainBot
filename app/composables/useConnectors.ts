@@ -11,6 +11,7 @@ export function useConnectors() {
 
   const { data: connectors, pending, error, refresh } = useFetch<ConnectorSummary[]>("/api/connectors", {
     server: false,
+    ...payloadCacheOptions,
   });
 
   const isInitialLoad = computed(() => pending.value && !connectors.value);

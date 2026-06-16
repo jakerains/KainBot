@@ -129,7 +129,7 @@ function resetForm() {
 
             <SettingsRow
               label="Phone"
-              description="For future SMS or iMessage linking."
+              description="Your E.164 number for iMessage linking via Sendblue."
             >
               <ProfilePhoneInput
                 v-model="form.phoneNumber"

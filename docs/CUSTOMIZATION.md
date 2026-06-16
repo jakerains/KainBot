@@ -111,9 +111,22 @@ credentials: connectSlackCredentials("slack/your-slug"),
 
 Slack linking uses the internal API — `INTERNAL_API_SECRET` must be set.
 
-### Phone number (future channels)
+### Sendblue (iMessage)
 
-Users can add an E.164 number on **Profile**. Stored for future SMS/iMessage support — no channel implementation in this template yet.
+Reach the agent over iMessage via [Sendblue](https://chat-sdk.dev/adapters/vendor-official/sendblue). Channel logic: [`agent/channels/sendblue.ts`](../agent/channels/sendblue.ts).
+
+1. Create a Sendblue account and copy API credentials + assigned number from the [dashboard](https://dashboard.sendblue.com) (or `@sendblue/cli`: `sendblue setup`, `sendblue show-keys`, `sendblue lines`)
+2. Set `SENDBLUE_*` env vars on the **eve** service — see [Environment](./ENVIRONMENT.md#sendblue-imessage-optional)
+3. Point the Sendblue receive webhook at `https://<your-domain>/_eve_internal/eve/eve/v1/sendblue/webhook`
+4. Users add their E.164 phone number in **Settings → Profile**, then message the Sendblue number from that phone
+
+Phone linking uses the internal API (`GET /api/internal/phone/link`) — `INTERNAL_API_SECRET` must be set.
+
+Tool approvals (`save_memory`) and OAuth prompts are delivered as plain-text iMessage with a link to the web chat — there is no button UI on iMessage.
+
+### Phone number (profile)
+
+Users add an E.164 number on **Profile**. Required for Sendblue/iMessage auth — the inbound sender number must match the linked profile phone.
 
 ## 7. Theme the UI
 

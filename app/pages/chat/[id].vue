@@ -20,7 +20,7 @@ const { data, error, pending: resumePending } = await useAsyncData(
     const { thread } = await $fetch<{ thread: ThreadRecord }>(`/api/threads/${chatId.value}`);
     return { thread, resume: resumeOptionsFromThread(thread) };
   },
-  { watch: [chatId], server: false },
+  { watch: [chatId], server: false, ...payloadCacheOptions },
 );
 
 if (error.value || !data.value?.thread) {

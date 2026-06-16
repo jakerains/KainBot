@@ -13,6 +13,7 @@ const LOCALES = [
 export function useProfile() {
   const { data, pending, error, refresh } = useFetch<ProfileResponse>("/api/profile", {
     key: "user-profile",
+    ...payloadCacheOptions,
   });
 
   const profile = computed(() => data.value?.profile);

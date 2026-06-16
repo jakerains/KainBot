@@ -3,6 +3,7 @@ import { authClient } from "~/lib/auth-client";
 
 definePageMeta({
   layout: false,
+  prerender: true,
 });
 
 const site = useSite();

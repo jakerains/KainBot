@@ -36,6 +36,8 @@
     "@vercel/connect": "0.2.3",
     "ai": "7.0.0-canary.165",
     "better-auth": "^1.6.18",
+    "chat": "^4.31.0",
+    "chat-adapter-sendblue": "^0.2.0",
     "drizzle-kit": "^0.31.10",
     "drizzle-orm": "^0.45.2",
     "eve": "beta",

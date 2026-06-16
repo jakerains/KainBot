@@ -8,6 +8,7 @@ interface ThreadListResponse {
 export function useThreadList() {
   const { data, pending, refresh, error } = useFetch<ThreadListResponse>("/api/threads", {
     key: THREAD_LIST_KEY,
+    ...payloadCacheOptions,
   });
 
   const threads = computed(() => data.value?.threads ?? []);

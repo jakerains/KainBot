@@ -18,6 +18,7 @@ interface UpdateMemoryResponse {
 export function useMemory() {
   const { data, pending, error, refresh } = useFetch<MemoryResponse>("/api/memory", {
     key: "user-memory",
+    ...payloadCacheOptions,
   });
 
   const memory = computed(() => data.value?.memory);

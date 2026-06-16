@@ -5,6 +5,7 @@ export function useSlackLink() {
 
   const { data, pending, error, refresh } = useFetch<SlackLinkSummary>("/api/slack/link", {
     server: false,
+    ...payloadCacheOptions,
   });
 
   const isLinked = computed(() => data.value?.linked === true);

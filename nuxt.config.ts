@@ -1,8 +1,40 @@
+const privateNoStore = { "cache-control": "private, no-store" } as const;
+const noStore = { "cache-control": "no-store" } as const;
+
 export default defineNuxtConfig({
   modules: ["@nuxt/ui", "@comark/nuxt", "eve/nuxt", "@nuxthub/core"],
   css: ["~/assets/css/main.css"],
   devtools: { enabled: true },
   compatibilityDate: "latest",
+  experimental: {
+    payloadExtraction: true,
+    viewTransition: true,
+  },
+  routeRules: {
+    "/login": { prerender: true },
+    "/": { ssr: true, headers: privateNoStore },
+    "/chat/**": { ssr: true, headers: privateNoStore },
+    "/settings/**": { ssr: true, headers: privateNoStore },
+    "/api/auth/**": { headers: noStore },
+    "/api/internal/**": { headers: noStore },
+    "/api/profile": { headers: privateNoStore },
+    "/api/profile/**": { headers: privateNoStore },
+    "/api/threads": { headers: privateNoStore },
+    "/api/threads/**": { headers: privateNoStore },
+    "/api/memory": { headers: privateNoStore },
+    "/api/memory/**": { headers: privateNoStore },
+    "/api/connectors": { headers: privateNoStore },
+    "/api/slack/**": { headers: privateNoStore },
+    "/api/integrations/**": { headers: privateNoStore },
+    "/_eve_internal/**": { headers: noStore },
+  },
+  nitro: {
+    compressPublicAssets: true,
+    prerender: {
+      routes: ["/login"],
+      crawlLinks: false,
+    },
+  },
   app: {
     head: {
       htmlAttrs: { lang: "en" },
