@@ -4,3 +4,4 @@ export * from "./schema/slack";
 export * from "./schema/phone";
 export * from "./schema/profile";
 export * from "./schema/memory";
+export * from "./schema/plaud";
