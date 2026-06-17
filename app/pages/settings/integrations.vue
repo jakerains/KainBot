@@ -41,9 +41,16 @@ const servicesDescription = computed(() => {
         <div class="space-y-8">
           <SettingsSection
             title="Channels"
-            description="Link messaging platforms to your V account."
+            description="Link messaging platforms to your Kain account."
           >
             <IntegrationsSlackLinkCard />
+          </SettingsSection>
+
+          <SettingsSection
+            title="Recordings"
+            description="Connect Plaud so Kain can read your meetings, notes, and transcripts."
+          >
+            <IntegrationsPlaudCard />
           </SettingsSection>
 
           <SettingsSection
