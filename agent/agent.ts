@@ -7,7 +7,7 @@ export default defineAgent({
       anthropic: {
         thinking: {
           type: "enabled",
-          budgetTokens: 2048,
+          budgetTokens: 1024,
         },
       },
     },
