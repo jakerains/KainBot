@@ -1,6 +1,6 @@
 import type { H3Event } from "h3";
 import { and, eq } from "drizzle-orm";
-import { db, schema } from "@nuxthub/db";
+import { db, schema } from "../db/client";
 import type { SlackLinkRecord, SlackLinkSummary } from "#shared/types/slack-link";
 
 export interface UpsertSlackLinkInput {

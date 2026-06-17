@@ -1,24 +1,23 @@
-import { index, primaryKey, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
-import { sql } from "drizzle-orm";
+import { index, pgTable, primaryKey, text, uniqueIndex } from "drizzle-orm/pg-core";
 
-export const slackLinks = sqliteTable("slack_links", {
+export const slackLinks = pgTable("slack_links", {
   appUserId: text("app_user_id").notNull(),
   slackTeamId: text("slack_team_id").notNull(),
   slackUserId: text("slack_user_id").notNull(),
   slackUserName: text("slack_user_name"),
   slackDisplayName: text("slack_display_name"),
   slackEmail: text("slack_email"),
-  linkedAt: text("linked_at").notNull().default(sql`(datetime('now'))`),
+  linkedAt: text("linked_at").notNull().$defaultFn(() => new Date().toISOString()),
 }, (table) => [
   primaryKey({ columns: [table.slackTeamId, table.slackUserId] }),
   uniqueIndex("slack_links_app_user_idx").on(table.appUserId),
 ]);
 
-export const slackLinkCodes = sqliteTable("slack_link_codes", {
-  code: text().primaryKey(),
+export const slackLinkCodes = pgTable("slack_link_codes", {
+  code: text("code").primaryKey(),
   appUserId: text("app_user_id").notNull(),
   expiresAt: text("expires_at").notNull(),
-  createdAt: text("created_at").notNull().default(sql`(datetime('now'))`),
+  createdAt: text("created_at").notNull().$defaultFn(() => new Date().toISOString()),
 }, (table) => [
   index("slack_link_codes_app_user_idx").on(table.appUserId),
 ]);

@@ -1,6 +1,6 @@
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth";
-import { db, schema } from "@nuxthub/db";
+import { db, schema } from "../db/client";
 
 const productionUrl = process.env.BETTER_AUTH_URL?.trim();
 
@@ -9,7 +9,7 @@ export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET,
   trustedOrigins: productionUrl ? [productionUrl] : undefined,
   database: drizzleAdapter(db, {
-    provider: "sqlite",
+    provider: "pg",
     schema,
   }),
   emailAndPassword: {

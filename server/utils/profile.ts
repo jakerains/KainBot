@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { db, schema } from "@nuxthub/db";
+import { db, schema } from "../db/client";
 import type { UserProfile, UserProfilePatch, UserProfileWithUser } from "#shared/types/profile";
 import {
   deletePhoneLinkForAppUser,

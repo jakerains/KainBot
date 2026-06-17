@@ -1,6 +1,6 @@
 import { randomBytes } from "node:crypto";
 import { desc, eq } from "drizzle-orm";
-import { db, schema } from "@nuxthub/db";
+import { db, schema } from "../db/client";
 import { upsertSlackLink } from "~~/server/utils/slack-links";
 
 const CODE_TTL_MS = 15 * 60 * 1000;

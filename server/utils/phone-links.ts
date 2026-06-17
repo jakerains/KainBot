@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { db, schema } from "@nuxthub/db";
+import { db, schema } from "../db/client";
 import type { PhoneLinkRecord } from "#shared/types/phone-link";
 
 const E164_PATTERN = /^\+[1-9]\d{7,14}$/;

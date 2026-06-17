@@ -2,7 +2,7 @@ const privateNoStore = { "cache-control": "private, no-store" } as const;
 const noStore = { "cache-control": "no-store" } as const;
 
 export default defineNuxtConfig({
-  modules: ["@nuxt/ui", "@comark/nuxt", "eve/nuxt", "@nuxthub/core", "@vercel/analytics"],
+  modules: ["@nuxt/ui", "@comark/nuxt", "eve/nuxt", "@vercel/analytics"],
   css: ["~/assets/css/main.css"],
   devtools: { enabled: true },
   compatibilityDate: "latest",
@@ -38,7 +38,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: "en" },
-      title: "V",
+      title: "Kain",
       titleTemplate: "%s",
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
@@ -46,7 +46,7 @@ export default defineNuxtConfig({
         {
           name: "description",
           content:
-            "Your personal AI agent. Chat on the web or Slack, query Linear, and pick up where you left off.",
+            "Kain (GenAIAlien) — your AI-obsessed builder sidekick. Chat on the web or over iMessage and pick up where you left off.",
         },
         { name: "theme-color", content: "#1b1718" },
         { name: "color-scheme", content: "light dark" },
@@ -56,9 +56,6 @@ export default defineNuxtConfig({
         { rel: "icon", href: "/favicon.ico" },
       ],
     },
-  },
-  hub: {
-    db: "sqlite",
   },
   runtimeConfig: {
     betterAuthSecret: process.env.BETTER_AUTH_SECRET,
