@@ -95,7 +95,7 @@ On Vercel, Eve handles provider configuration through the platform. For local de
 Integrations use [Vercel Connect](https://vercel.com/docs/connect) — no extra env vars in this repo, but you must:
 
 1. Create Connect resources (Linear MCP, Slack) in your Vercel team
-2. Update the Slack slug in [`agent/channels/slack.ts`](../agent/channels/slack.ts) (default: `slack/adam`)
+2. Update the Slack slug in [`agent/channels/slack.ts`](../agent/channels/slack.ts) (default: `slack/v`)
 3. Connect clients in **Settings → Integrations** in the app
 
 See [Customization](./CUSTOMIZATION.md#integrations) for setup steps.

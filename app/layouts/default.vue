@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { agent } from "~~/shared/agent";
 import { startNewChat } from "~/composables/chat/navigation";
 import { useThreadList } from "~/composables/chat/useThreads";
 
@@ -57,16 +56,10 @@ defineShortcuts({
       <template #header="{ collapsed }">
         <NuxtLink
           to="/"
-          class="flex items-center gap-2.5 min-w-0"
-          :class="collapsed ? 'mx-auto' : ''"
+          class="flex items-center min-w-0"
+          :class="collapsed ? 'mx-auto' : 'px-2.5'"
         >
-          <Logo class="h-3.5 w-auto shrink-0 text-highlighted" />
-          <span
-            v-if="!collapsed"
-            class="truncate text-base font-semibold text-highlighted"
-          >
-            {{ agent.name }}
-          </span>
+          <Logo class="h-5 w-auto shrink-0 text-highlighted" />
         </NuxtLink>
 
         <UDashboardSidebarCollapse

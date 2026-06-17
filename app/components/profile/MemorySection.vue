@@ -122,7 +122,7 @@ async function handleSaveEdit() {
   <section>
     <SettingsSection
       title="Memory"
-      description="Long-term context Adam uses across web and Slack."
+      description="Long-term context V uses across web and Slack."
     >
       <template
         v-if="hasMemory && !pending"
@@ -161,7 +161,7 @@ async function handleSaveEdit() {
           No memory yet.
         </p>
         <p class="mt-1 text-xs text-dimmed">
-          Import from ChatGPT or let Adam suggest saving preferences in chat.
+          Import from ChatGPT or let V suggest saving preferences in chat.
         </p>
         <UButton
           class="mt-4"

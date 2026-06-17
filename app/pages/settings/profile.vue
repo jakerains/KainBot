@@ -105,11 +105,11 @@ function resetForm() {
         >
           <SettingsSection
             title="Profile"
-            description="How Adam identifies you across web and Slack."
+            description="How V identifies you across web and Slack."
           >
             <SettingsRow
               label="Name"
-              description="Shown in the sidebar and used when Adam addresses you."
+              description="Shown in the sidebar and used when V addresses you."
             >
               <UInput
                 v-model="form.name"

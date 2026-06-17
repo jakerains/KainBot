@@ -97,7 +97,7 @@ rm -rf .data/db && pnpm db:migrate
 
 ## Customization
 
-Personal Agent Template ships with **Adam** as the example persona. See the [Customization Guide](./docs/CUSTOMIZATION.md) for how to:
+Personal Agent Template ships with **V** as the example persona. See the [Customization Guide](./docs/CUSTOMIZATION.md) for how to:
 
 - Rename your agent (name, slug, persona)
 - Change the AI model
@@ -115,7 +115,7 @@ Long-term memory is injected into every Eve session for authenticated users (web
 3. Paste the response → **Add to Memory**
 4. Start a **new chat** so the agent picks up the latest context
 
-Adam can also propose facts via **`save_memory`** — approve or skip in chat. Edit or delete entries on **Profile → Memory**.
+V can also propose facts via **`save_memory`** — approve or skip in chat. Edit or delete entries on **Profile → Memory**.
 
 ## How It Works
 

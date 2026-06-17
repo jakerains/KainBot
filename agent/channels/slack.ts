@@ -66,14 +66,14 @@ async function tryHandleSlackLinkCommand(
 
   if (result.ok) {
     await ctx.thread.post(
-      "Your Slack account is now linked to Adam. Mentions and DMs will use your profile and integrations.",
+      "Your Slack account is now linked to V. Mentions and DMs will use your profile and integrations.",
     );
     return true;
   }
 
   const reason = result.reason === "expired"
-    ? "That link code has expired. Generate a new one in Adam → Integrations."
-    : "That link code is invalid. Generate a fresh code in Adam → Integrations.";
+    ? "That link code has expired. Generate a new one in V → Integrations."
+    : "That link code is invalid. Generate a fresh code in V → Integrations.";
 
   await ctx.thread.post(reason);
   return true;
@@ -141,7 +141,7 @@ async function buildSlackTurn(ctx: SlackContext, message: SlackMessage) {
   });
   if (prior.length > 0) {
     const transcript = prior
-      .map((m) => `${m.isMe ? "Adam" : (m.user ?? "user")}: ${m.markdown}`)
+      .map((m) => `${m.isMe ? "V" : (m.user ?? "user")}: ${m.markdown}`)
       .join("\n");
     context.push(`Recent thread messages since your last reply:\n\n${transcript}`);
   }
@@ -163,9 +163,9 @@ async function buildSlackTurn(ctx: SlackContext, message: SlackMessage) {
   if (!linked) {
     const linkUrl = process.env.BETTER_AUTH_URL
       ? `${process.env.BETTER_AUTH_URL.replace(/\/$/, "")}/settings/integrations`
-      : "Adam → Integrations";
+      : "V → Integrations";
     context.push(
-      `This Slack account is not linked to an Adam profile yet. Open ${linkUrl}, generate a link code, then message \`link <code>\` here.`,
+      `This Slack account is not linked to a V profile yet. Open ${linkUrl}, generate a link code, then message \`link <code>\` here.`,
     );
   }
 
@@ -177,7 +177,7 @@ async function buildSlackTurn(ctx: SlackContext, message: SlackMessage) {
 
 // Replace with your Vercel Connect Slack slug (e.g. "slack/your-agent").
 export default slackChannel({
-  credentials: connectSlackCredentials("slack/adam"),
+  credentials: connectSlackCredentials("slack/v"),
 
   async onAppMention(ctx, message) {
     return buildSlackTurn(ctx, message);

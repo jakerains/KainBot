@@ -234,7 +234,7 @@ export async function fetchLinearIssuesViaMcp(token: string) {
     params: {
       protocolVersion: '2024-11-05',
       capabilities: {},
-      clientInfo: { name: 'adam', version: '1.0.0' },
+      clientInfo: { name: 'v', version: '1.0.0' },
     },
   })
 

@@ -2,7 +2,7 @@
 
 > Back to [README](../README.md) | See also: [Environment](./ENVIRONMENT.md), [Architecture](./ARCHITECTURE.md)
 
-Personal Agent Template ships with **Adam** as the example persona. This guide covers how to fork and make it yours.
+Personal Agent Template ships with **V** as the example persona. This guide covers how to fork and make it yours.
 
 ## 1. Rename your agent
 
@@ -40,7 +40,7 @@ This name appears in the navbar, settings, and integration cards.
 
 Edit [`agent/lib/base-instructions.ts`](../agent/lib/base-instructions.ts) — system prompt, tone, tool usage rules, memory behavior.
 
-Search the codebase for `Adam` to update remaining UI copy in Vue components.
+Search the codebase for `V` to update remaining UI copy in Vue components.
 
 ### Package metadata
 

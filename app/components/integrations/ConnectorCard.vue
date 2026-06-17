@@ -192,7 +192,7 @@ const statusDotClass = computed(() => {
     <UModal
       v-model:open="showRevokeModal"
       :title="`Disconnect ${connector.name}?`"
-      description="Adam will lose access until you connect again."
+      description="V will lose access until you connect again."
     >
       <template #footer>
         <UButton

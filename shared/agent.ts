@@ -1,8 +1,8 @@
 // Customize agent branding here (name, slug, tagline, avatar).
 export const agent = {
-  name: "Adam",
-  slug: "adam",
-  tagline: "Your personal AI assistant",
+  name: "V",
+  slug: "v",
+  tagline: "What do you need?",
   description:
     "Remembers your context across conversations and channels.",
   avatar: {
