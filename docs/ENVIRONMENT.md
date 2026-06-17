@@ -107,14 +107,14 @@ These paths are gitignored and should never be committed:
 | Path | Purpose |
 |------|---------|
 | `.env` | Local secrets |
-| `.data/` | SQLite database (NuxtHub) |
+| `.data/` | Legacy — DB is now remote Neon Postgres |
 | `.eve/` | Eve dev cache |
 | `.vercel/` | Vercel CLI link metadata |
 
-Reset the local database:
+Database is remote Neon (no local DB file). Re-apply migrations:
 
 ```bash
-rm -rf .data/db && pnpm db:migrate
+pnpm db:migrate
 ```
 
 ### Eve dev timeout

@@ -26,7 +26,7 @@ flowchart TB
     api["/api/* — public API"]
     internal["/api/internal — agent-only"]
     auth[Better Auth]
-    db[(NuxtHub SQLite — Drizzle)]
+    db[(Neon Postgres — Drizzle)]
   end
 
   connect[Vercel Connect — Linear · Slack]
@@ -132,7 +132,7 @@ Agent-side clients live in `agent/lib/*-internal.ts`.
 
 ## Database
 
-SQLite via [NuxtHub](https://hub.nuxt.com). Schema in [`server/db/schema/`](../server/db/schema/).
+Neon Postgres via [@neondatabase/serverless](https://neon.tech). Schema in [`server/db/schema/`](../server/db/schema/).
 
 Key tables:
 

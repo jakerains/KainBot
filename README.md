@@ -49,7 +49,7 @@ Morning briefing skill: active focus from memory, assigned Linear issues, and a 
                                 │ /api/internal/* (Bearer auth)
                                 ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│         Nuxt (UI + Nitro API + Better Auth + SQLite)           │
+│         Nuxt (UI + Nitro API + Better Auth + Neon Postgres)           │
 └───────────────────────────────┬─────────────────────────────────┘
                                 ▼
                       Vercel Connect (Linear, Slack)
@@ -89,10 +89,10 @@ INTERNAL_API_SECRET=...      # openssl rand -base64 32 — same on web + eve
 
 See [ENVIRONMENT.md](./docs/ENVIRONMENT.md) for the full reference.
 
-Fresh local database:
+Database migrations (remote Neon — provisioned by the Vercel Neon integration):
 
 ```bash
-rm -rf .data/db && pnpm db:migrate
+pnpm db:migrate
 ```
 
 ## Customization
@@ -144,7 +144,7 @@ See [AGENTS.md](./AGENTS.md) for notes aimed at AI coding assistants.
 - [Eve](https://eve.dev) — Durable agent framework
 - [Nuxt](https://nuxt.com) — Full-stack Vue framework
 - [Nuxt UI](https://ui.nuxt.com) — UI component library
-- [NuxtHub](https://hub.nuxt.com) — SQLite database
+- [Neon](https://neon.tech) — Serverless Postgres database
 - [Better Auth](https://www.better-auth.com) — Authentication
 - [Drizzle ORM](https://orm.drizzle.team) — Type-safe database queries
 - [Vercel Connect](https://vercel.com/docs/connect) — Linear and Slack integrations
